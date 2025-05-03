@@ -54,7 +54,7 @@ GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO saam_user;
 1. Clone o repositório:
 
 ```bash
-git clone [URL_DO_REPOSITORIO]
+git clone https://github.com/vitorsasaki/saam-test.git
 cd SAAM-teste
 ```
 
