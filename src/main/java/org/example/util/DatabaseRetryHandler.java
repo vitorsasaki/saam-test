@@ -106,17 +106,4 @@ public class DatabaseRetryHandler {
         throw new DatabaseException("Falha ao executar " + description + " após " + maxRetries + " tentativas", lastException);
     }
     
-    /**
-     * Executa uma operação sem retorno com retry automático.
-     *
-     * @param operation operação a ser executada
-     * @param description descrição da operação para logs
-     * @throws DatabaseException se todas as tentativas falharem
-     */
-    public static void executeWithRetry(Runnable operation, String description) throws DatabaseException {
-        executeWithRetry(() -> {
-            operation.run();
-            return null;
-        }, description);
-    }
 } 

@@ -31,8 +31,7 @@ public class FuncionarioPanel extends JPanel {
     private JCheckBox chkStatus;
     private JTable tblFuncionarios;
     private JLabel lblModoEdicao;
-    
-    // Componentes para filtros
+
     private JTextField txtFiltroId;
     private JTextField txtFiltroNome;
     private JFormattedTextField txtFiltroDataInicio;
@@ -54,8 +53,7 @@ public class FuncionarioPanel extends JPanel {
     private void inicializarComponentes() {
         setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        
-        // Painel de formulário
+
         JPanel formPanel = new JPanel();
         formPanel.setLayout(new GridBagLayout());
         formPanel.setBorder(BorderFactory.createTitledBorder("Dados do Funcionário"));
@@ -63,8 +61,7 @@ public class FuncionarioPanel extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        
-        // Campos de formulário
+
         JLabel lblNome = new JLabel("Nome:");
         txtNome = new JTextField(30);
         
@@ -89,13 +86,11 @@ public class FuncionarioPanel extends JPanel {
         JLabel lblStatus = new JLabel("Status:");
         chkStatus = new JCheckBox();
         chkStatus.setSelected(true);
-        
-        // Label para mostrar modo de edição
+
         lblModoEdicao = new JLabel("Modo: Novo registro");
         lblModoEdicao.setFont(new Font(lblModoEdicao.getFont().getName(), Font.BOLD, 12));
         lblModoEdicao.setForeground(new Color(0, 102, 204)); // Azul
-        
-        // Adiciona campos ao painel de formulário
+
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weightx = 0;
@@ -136,8 +131,7 @@ public class FuncionarioPanel extends JPanel {
         gbc.gridx = 1;
         gbc.weightx = 1;
         formPanel.add(chkStatus, gbc);
-        
-        // Painel de botões
+
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         
         JButton btnSalvar = new JButton("Salvar");
@@ -156,11 +150,9 @@ public class FuncionarioPanel extends JPanel {
         buttonPanel.add(btnNovo);
         buttonPanel.add(btnAlterar);
         buttonPanel.add(btnExcluir);
-        
-        // Painel de filtros
+
         JPanel filterPanel = criarPainelFiltros();
-                
-        // Painel de tabela
+
         tableModel = new FuncionarioTableModel();
         tblFuncionarios = new JTable(tableModel);
         tblFuncionarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -178,15 +170,13 @@ public class FuncionarioPanel extends JPanel {
         
         JScrollPane scrollPane = new JScrollPane(tblFuncionarios);
         scrollPane.setPreferredSize(new Dimension(600, 300));
-        
-        // Adiciona os painéis ao painel principal
+
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.add(formPanel, BorderLayout.CENTER);
         topPanel.add(buttonPanel, BorderLayout.SOUTH);
         
         add(topPanel, BorderLayout.NORTH);
-        
-        // Criando um painel central para conter os filtros e a tabela
+
         JPanel centerPanel = new JPanel(new BorderLayout(0, 10));
         centerPanel.add(filterPanel, BorderLayout.NORTH);
         centerPanel.add(scrollPane, BorderLayout.CENTER);
@@ -198,8 +188,7 @@ public class FuncionarioPanel extends JPanel {
         JPanel filterPanel = new JPanel();
         filterPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
         filterPanel.setBorder(BorderFactory.createTitledBorder("Filtros de Busca"));
-        
-        // Grupo de botões para tipo de filtro
+
         ButtonGroup grupoBotoes = new ButtonGroup();
         
         rdbSemFiltro = new JRadioButton("Sem filtro");
@@ -212,8 +201,7 @@ public class FuncionarioPanel extends JPanel {
         grupoBotoes.add(rdbFiltroId);
         grupoBotoes.add(rdbFiltroNome);
         grupoBotoes.add(rdbFiltroPeriodo);
-        
-        // Campos de filtro
+
         txtFiltroId = new JTextField(5);
         txtFiltroNome = new JTextField(15);
         
@@ -229,27 +217,22 @@ public class FuncionarioPanel extends JPanel {
         
         txtFiltroDataInicio.setColumns(8);
         txtFiltroDataFim.setColumns(8);
-        
-        // Botão para aplicar filtro
+
         JButton btnFiltrar = new JButton("Aplicar Filtro");
         btnFiltrar.addActionListener(this::aplicarFiltro);
-        
-        // Adicionando componentes na mesma linha
+
         filterPanel.add(rdbSemFiltro);
-        
-        // Painel ID
+
         JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 2, 0));
         idPanel.add(rdbFiltroId);
         idPanel.add(txtFiltroId);
         filterPanel.add(idPanel);
-        
-        // Painel Nome
+
         JPanel nomePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 2, 0));
         nomePanel.add(rdbFiltroNome);
         nomePanel.add(txtFiltroNome);
         filterPanel.add(nomePanel);
-        
-        // Painel Período
+
         JPanel periodoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 2, 0));
         periodoPanel.add(rdbFiltroPeriodo);
         periodoPanel.add(new JLabel("De:"));
@@ -257,16 +240,12 @@ public class FuncionarioPanel extends JPanel {
         periodoPanel.add(new JLabel("Até:"));
         periodoPanel.add(txtFiltroDataFim);
         filterPanel.add(periodoPanel);
-        
-        // Botão Filtrar
+
         filterPanel.add(btnFiltrar);
         
         return filterPanel;
     }
-    
-    /**
-     * Aplica os filtros selecionados e atualiza a tabela.
-     */
+
     private void aplicarFiltro(ActionEvent e) {
         List<Funcionario> funcionariosFiltrados;
         
@@ -318,7 +297,6 @@ public class FuncionarioPanel extends JPanel {
                 return;
             }
         } else {
-            // Caso padrão, sem filtro
             funcionariosFiltrados = funcionarioController.listarFuncionarios();
         }
         
@@ -396,12 +374,10 @@ public class FuncionarioPanel extends JPanel {
             String mensagem;
             
             if (funcionarioSelecionado == null) {
-                // Novo funcionário
                 Optional<Funcionario> novoFuncionario = funcionarioController.cadastrarFuncionario(nome, dataAdmissao, salario, status);
                 resultado = novoFuncionario.isPresent();
                 mensagem = "Funcionário cadastrado com sucesso!";
             } else {
-                // Atualiza funcionário existente
                 funcionarioSelecionado.setNome(nome);
                 funcionarioSelecionado.setDataAdmissao(dataAdmissao);
                 funcionarioSelecionado.setSalario(salario);
@@ -423,10 +399,7 @@ public class FuncionarioPanel extends JPanel {
             JOptionPane.showMessageDialog(this, "Erro ao processar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    /**
-     * Carrega os dados do funcionário selecionado na tabela para edição
-     */
+
     private void alterarFuncionario(ActionEvent e) {
         int selectedRow = tblFuncionarios.getSelectedRow();
         if (selectedRow < 0) {

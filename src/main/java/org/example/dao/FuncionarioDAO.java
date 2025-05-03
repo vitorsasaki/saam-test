@@ -5,13 +5,10 @@ import org.example.exception.DatabaseException;
 import org.example.model.Funcionario;
 import org.example.util.DatabaseExceptionHandler;
 import org.example.util.DatabaseRetryHandler;
-import org.example.util.TransactionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.math.BigDecimal;
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
